@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom Piper | Floristería Boutique en La Habana</title>
+    <meta name="description" content="Floristería boutique en La Habana. Ramos de flores únicos con esencia natural y minimalismo floral para cada ocasión especial.">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-cream: #FDF8F3;
+            --color-blush: #F8E8E0;
+            --color-rose: #E8B4B8;
+            --color-sage: #A8B5A0;
+            --color-forest: #5C6B54;
+            --color-gold: #C9A86C;
+            --color-dark: #2C2C2C;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-cream);
+            color: var(--color-dark);
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Elegant gradient backgrounds */
+        .gradient-hero {
+            background: linear-gradient(135deg, #fdf8f3 0%, #f8e8e0 50%, #fdf8f3 100%);
+        }
+        
+        .gradient-sage {
+            background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-forest) 100%);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        @keyframes petal-fall {
+            0% { transform: translateY(-10%) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Elegant button styles */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-rose) 0%, #d4a0a4 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(232, 180, 184, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(232, 180, 184, 0.6);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--color-forest);
+            color: var(--color-forest);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--color-forest);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Card styles */
+        .flower-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        
+        .flower-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .flower-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .flower-card img {
+            transition: transform 0.6s ease;
+        }
+        
+        /* Image overlay effect */
+        .image-overlay {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .image-overlay:hover::after {
+            opacity: 1;
+        }
+        
+        /* Decorative elements */
+        .decorative-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-rose));
+        }
+        
+        /* Petal decorations */
+        .petal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--color-rose);
+            border-radius: 50% 0 50% 50%;
+            opacity: 0.3;
+            animation: petal-fall 15s linear infinite;
+        }
+        
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
+            transition: all 0.4s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.7);
+        }
+        
+        /* Navbar */
+        .navbar {
+            transition: all 0.4s ease;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Gallery lightbox effect */
+        .gallery-item {
+            cursor: pointer;
+        }
+        
+        /* Shimmer effect for loading */
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Elegant section divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-rose), transparent);
+        }
+        
+        /* Quote styling */
+        .quote-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            line-height: 1;
+            color: var(--color-rose);
+            opacity: 0.3;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Petals Decoration -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="petal" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="petal" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="petal" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="petal" style="left: 50%; animation-delay: 1s;"></div>
+        <div class="petal" style="left: 70%; animation-delay: 3s;"></div>
+        <div class="petal" style="left: 85%; animation-delay: 5s;"></div>
+        <div class="petal" style="left: 95%; animation-delay: 2.5s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed top-0 left-0 right-0 z-50 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-rose-200 to-rose-300 flex items-center justify-center">
+                    <span class="text-2xl">🌸</span>
+                </div>
+                <div>
+                    <h1 class="font-display text-xl font-semibold text-gray-800">Bloom Piper</h1>
+                    <p class="text-xs text-gray-500 tracking-widest uppercase">Floristería Boutique</p>
+                </div>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#inicio" class="text-sm text-gray-600 hover:text-gray-900 transition">Inicio</a>
+                <a href="#nosotros" class="text-sm text-gray-600 hover:text-gray-900 transition">Nosotros</a>
+                <a href="#catalogo" class="text-sm text-gray-600 hover:text-gray-900 transition">Catálogo</a>
+                <a href="#servicios" class="text-sm text-gray-600 hover:text-gray-900 transition">Servicios</a>
+                <a href="#contacto" class="text-sm text-gray-600 hover:text-gray-900 transition">Contacto</a>
+            </div>
+            
+            <!-- CTA Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://www.instagram.com/bloompipper" target="_blank" class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center text-white hover:scale-110 transition">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="https://wa.me/5356856498?text=Hola%20%F0%9F%8C%B8%20Me%20gustar%C3%ADa%20hacer%20un%20pedido" target="_blank" class="btn-primary text-sm">
+                    Pedir Ahora
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="menuBtn" class="md:hidden p-2 text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 p-8">
+            <button id="closeMenu" class="absolute top-6 right-6 text-gray-500 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            <div class="mt-16 flex flex-col gap-6">
+                <a href="#inicio" class="text-lg text-gray-700 hover:text-rose-400 transition">Inicio</a>
+                <a href="#nosotros" class="text-lg text-gray-700 hover:text-rose-400 transition">Nosotros</a>
+                <a href="#catalogo" class="text-lg text-gray-700 hover:text-rose-400 transition">Catálogo</a>
+                <a href="#servicios" class="text-lg text-gray-700 hover:text-rose-400 transition">Servicios</a>
+                <a href="#contacto" class="text-lg text-gray-700 hover:text-rose-400 transition">Contacto</a>
+                <div class="pt-6 border-t border-gray-200">
+                    <a href="https://www.instagram.com/bloompipper" target="_blank" class="flex items-center gap-3 text-gray-600 hover:text-pink-500 transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        @bloompipper
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="gradient-hero min-h-screen flex items-center relative overflow-hidden pt-20">
+        <!-- Decorative circles -->
+        <div class="absolute top-20 right-0 w-96 h-96 bg-rose-200/30 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-green-200/20 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 py-20 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full mb-6 animate-fade-in">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span class="text-sm text-gray-600">Envíos en La Habana</span>
+                    </div>
+                    
+                    <h1 class="hero-title font-display text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 leading-tight mb-6 animate-fade-in-up">
+                        Flores que 
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-500">cuentan historias</span>
+                    </h1>
+                    
+                    <p class="text-lg text-gray-600 mb-4 animate-fade-in-up delay-100 leading-relaxed">
+                        🌿 <strong>Minimalismo floral con esencia natural</strong>
+                    </p>
+                    
+                    <p class="text-gray-500 mb-8 animate-fade-in-up delay-200 max-w-lg mx-auto lg:mx-0">
+                        Creamos ramos únicos y personalizados para cada ocasión especial. 
+                        Desde cumpleaños hasta declaraciones de amor, cada flor es elegida con cuidado y pasión.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up delay-300">
+                        <a href="https://wa.me/5356856498?text=Hola%20%F0%9F%8C%B8%20Quiero%20hacer%20un%20pedido%20especial" target="_blank" class="btn-primary inline-flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                            </svg>
+                            Pedir por WhatsApp
+                        </a>
+                        <a href="#catalogo" class="btn-secondary inline-flex items-center justify-center gap-2">
+                            Ver Catálogo
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </a>
+                    </div>
+                    
+                    <!-- Trust badges -->
+                    <div class="mt-12 flex flex-wrap gap-6 justify-center lg:justify-start animate-fade-in-up delay-400">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">💐</span>
+                            <span class="text-sm text-gray-500">Flores Frescas</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">🚚</span>
+                            <span class="text-sm text-gray-500">Entrega Rápida</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">✨</span>
+                            <span class="text-sm text-gray-500">Diseños Únicos</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Image -->
+                <div class="relative animate-fade-in delay-200">
+                    <div class="relative z-10 animate-float">
+                        <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600&h=700&fit=crop" 
+                             alt="Ramo de flores elegante" 
+                             class="w-full max-w-md mx-auto rounded-3xl shadow-2xl object-cover"
+                             style="height: 500px;">
+                        
+                        <!-- Floating card -->
+                        <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-xl flex items-center gap-3">
+                            <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center">
+                                <span class="text-2xl">🌷</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800">Ramo Premium</p>
+                                <p class="text-xs text-gray-500">Desde $25 USD</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Rating card -->
+                        <div class="absolute -top-4 -right-4 bg-white rounded-2xl p-4 shadow-xl">
+                            <div class="flex items-center gap-1 text-yellow-400 mb-1">
+                                ★★★★★
+                            </div>
+                            <p class="text-xs text-gray-500">+100 clientes felices</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative elements -->
+                    <div class="absolute top-10 right-10 w-20 h-20 bg-rose-200 rounded-full opacity-60 blur-xl"></div>
+                    <div class="absolute bottom-20 left-0 w-32 h-32 bg-green-200 rounded-full opacity-40 blur-xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Image -->
+                <div class="scroll-reveal relative">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=400&h=500&fit=crop" 
+                             alt="Arreglo floral minimalista" 
+                             class="w-full rounded-2xl shadow-lg object-cover h-64">
+                        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&h=500&fit=crop" 
+                             alt="Rosas elegantes" 
+                             class="w-full rounded-2xl shadow-lg object-cover h-64 mt-8">
+                        <img src="https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=400&h=500&fit=crop" 
+                             alt="Flores pastel" 
+                             class="w-full rounded-2xl shadow-lg object-cover h-64 -mt-8">
+                        <img src="https://images.unsplash.com/photo-1518882605630-8eb771897914?w=400&h=500&fit=crop" 
+                             alt="Bouquet romántico" 
+                             class="w-full rounded-2xl shadow-lg object-cover h-64">
+                    </div>
+                </div>
+                
+                <!-- Text -->
+                <div class="scroll-reveal">
+                    <span class="text-rose-400 font-medium tracking-widest uppercase text-sm">Nuestra Esencia</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-800 mt-4 mb-6">
+                        Minimalismo floral con <span class="text-rose-400">alma natural</span>
+                    </h2>
+                    
+                    <div class="decorative-line mb-8"></div>
+                    
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        En <strong>Bloom Piper</strong> creemos que cada flor tiene una historia que contar. 
+                        Nos especializamos en crear arreglos florales que combinan la elegancia del minimalismo 
+                        con la belleza auténtica de la naturaleza.
+                    </p>
+                    
+                    <p class="text-gray-600 leading-relaxed mb-8">
+                        Cada ramo es diseñado con dedicación, seleccionando cuidadosamente las mejores flores 
+                        para transmitir emociones genuinas. Ya sea para celebrar el amor, la amistad o simplemente 
+                        alegrar un día, nuestras creaciones están hechas para dejar huella.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-lg">🌸</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Flores Frescas</h4>
+                                <p class="text-sm text-gray-500">Selección diaria de las mejores</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-lg">🎨</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Diseño Único</h4>
+                                <p class="text-sm text-gray-500">Cada ramo es irrepetible</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-lg">💝</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Con Amor</h4>
+                                <p class="text-sm text-gray-500">Hecho a mano con pasión</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-lg">⭐</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Calidad Premium</h4>
+                                <p class="text-sm text-gray-500">Solo lo mejor para ti</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://www.instagram.com/bloompipper" target="_blank" class="inline-flex items-center gap-2 text-rose-400 font-medium hover:text-rose-500 transition">
+                        Síguenos en Instagram
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalogo" class="py-24 bg-gradient-to-b from-white to-rose-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="text-rose-400 font-medium tracking-widest uppercase text-sm">Nuestras Creaciones</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-800 mt-4 mb-6">
+                    Catálogo de <span class="text-rose-400">Ramos</span>
+                </h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">
+                    Descubre nuestra colección de arreglos florales, cada uno diseñado para transmitir emociones únicas
+                </p>
+                <div class="decorative-line mx-auto mt-6"></div>
+            </div>
+            
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12 scroll-reveal">
+                <button class="px-6 py-2 rounded-full bg-rose-400 text-white font-medium text-sm transition hover:bg-rose-500">
+                    Todos
+                </button>
+                <button class="px-6 py-2 rounded-full bg-white text-gray-600 font-medium text-sm transition hover:bg-rose-100">
+                    Románticos
+                </button>
+                <button class="px-6 py-2 rounded-full bg-white text-gray-600 font-medium text-sm transition hover:bg-rose-100">
+                    Cumpleaños
+                </button>
+                <button class="px-6 py-2 rounded-full bg-white text-gray-600 font-medium text-sm transition hover:bg-rose-100">
+                    Minimalistas
+                </button>
+                <button class="px-6 py-2 rounded-full bg-white text-gray-600 font-medium text-sm transition hover:bg-rose-100">
+                    Premium
+                </button>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Product 1 -->
+                <div class="flower-card scroll-reveal">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=500&h=400&fit=crop" 
+                             alt="Ramo Amor Eterno" 
+                             class="w-full h-72 object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-rose-400 text-white text-xs font-medium rounded-full">Bestseller</span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition shadow-lg">
+                                <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-yellow-400 text-sm">★★★★★</span>
+                            <span class="text-gray-400 text-xs">(24 reseñas)</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-800 mb-2">Amor Eterno</h3>
+                        <p class="text-gray-500 text-sm mb-4">Rosas rojas premium con follaje verde elegante</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-rose-400">$35 USD</span>
+                            <a href="https://wa.me/5356856498?text=Hola%20%F0%9F%8C%B8%20Quiero%20el%20ramo%20Amor%20Eterno" target="_blank" class="px-4 py-2 bg-rose-400 text-white rounded-full text-sm font-medium hover:bg-rose-500 transition">
+                                Pedir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="flower-card scroll-reveal" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=500&h=400&fit=crop" 
+                             alt="Ramo Primavera Rosa" 
+                             class="w-full h-72 object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-green-400 text-white text-xs font-medium rounded-full">Nuevo</span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition shadow-lg">
+                                <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-yellow-400 text-sm">★★★★★</span>
+                            <span class="text-gray-400 text-xs">(18 reseñas)</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-800 mb-2">Primavera Rosa</h3>
+                        <p class="text-gray-500 text-sm mb-4">Peonías y rosas en tonos pastel suaves</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-rose-400">$45 USD</span>
+                            <a href="https://wa.me/5356856498?text=Hola%20%F0%9F%8C%B8%20Quiero%20el%20ramo%20Primavera%20Rosa" target="_blank" class="px-4 py-2 bg-rose-400 text-white rounded-full text-sm font-medium hover:bg-rose-500 transition">
+                                Pedir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="flower-card scroll-reveal" style="transition-delay: 0.2s;">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=500&h=400&fit=crop" 
+                             alt="Ramo Elegancia Natural" 
+                             class="w-full h-72 object-cover">
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition shadow-lg">
+                                <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-yellow-400 text-sm">★★★★☆</span>
+                            <span class="text-gray-400 text-xs">(12 reseñas)</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-800 mb-2">Elegancia Natural</h3>
+                        <p class="text-gray-500 text-sm mb-4">Flores silvestres con estilo minimalista</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-rose-400">$28 USD</span>
+                            <a href="https://wa.me/5356856498?text=Hola%20%F0%9F%8C%B8%20Quiero%20el%20ramo%20Elegancia%20Natural" target="_blank" class="px-4 py-2 bg-rose-400 text-white rounded-full text-sm font-medium hover:bg-rose-500 transition">
+                                Pedir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="flower-card scroll-reveal">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=500&h=400&fit=crop" 
+                             alt="Ramo Sunset Dreams" 
+                             class="w-full h-72 object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-amber-400 text-white text-xs font-medium rounded-full">Popular</span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition shadow-lg">
+                                <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-yellow-400 text-sm">★★★★★</span>
+                            <span class="text-gray-400 text-xs">(31 reseñas)</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-800 mb-2">Sunset Dreams</h3>
+                        <p class="text-gray-500 text-sm mb-4">Girasoles y flores cálidas de otoño</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-rose-400">$32 USD</span>
+                            <a href="https://wa.me/5356856498?text=Hola%20%F0%9F%8C%B8%20Quiero%20el%20ramo%20Sunset%20Dreams" target="_blank" class="px-4 py-2 bg-rose-400 text-white rounded-full text-sm font-medium hover:bg-rose-500 transition">
+                                Pedir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="flower-card scroll-reveal" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=500&h=400&fit=crop" 
+                             alt="Ramo Pureza Blanca" 
+                             class="w-full h-72 object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-purple-400 text-white text-xs font-medium rounded-full">Premium</span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition shadow-lg">
+                                <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-yellow-400 text-sm">★★★★★</span>
+                            <span class="text-gray-400 text-xs">(27 reseñas)</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-800 mb-2">Pureza Blanca</h3>
+                        <p class="text-gray-500 text-sm mb-4">Rosas blancas y lirios elegantes</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-rose-400">$55 USD</span>
+                            <a href="https://wa.me/5356856498?text=Hola%20%F0%9F%8C%B8%20Quiero%20el%20ramo%20Pureza%20Blanca" target="_blank" class="px-4 py-2 bg-rose-400 text-white rounded-full text-sm font-medium hover:bg-rose-500 transition">
+                                Pedir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="flower-card scroll-reveal" style="transition-delay: 0.2s;">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518882605630-8eb771897914?w=500&h=400&fit=crop" 
+                             alt="Ramo Romance Vintage" 
+                             class="w-full h-72 object-cover">
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition shadow-lg">
+                                <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-yellow-400 text-sm">★★★★★</span>
+                            <span class="text-gray-400 text-xs">(19 reseñas)</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-800 mb-2">Romance Vintage</h3>
+                        <p class="text-gray-500 text-sm mb-4">Rosas garden con eucalipto y lavanda</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-rose-400">$42 USD</span>
+                            <a href="https://wa.me/5356856498?text=Hola%20%F0%9F%8C%B8%20Quiero%20el%20ramo%20Romance%20Vintage" target="_blank" class="px-4 py-2 bg-rose-400 text-white rounded-full text-sm font-medium hover:bg-rose-500 transition">
+                                Pedir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- View More Button -->
+            <div class="text-center mt-12 scroll-reveal">
+                <a href="https://www.instagram.com/bloompipper" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 border-2 border-rose-300 text-rose-400 rounded-full font-medium hover:bg-rose-400 hover:text-white transition">
+                    Ver más en Instagram
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="text-rose-400 font-medium tracking-widest uppercase text-sm">Servicios</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-800 mt-4 mb-6">
+                    Ocasiones <span class="text-rose-400">Especiales</span>
+                </h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">
+                    Hacemos que cada momento sea inolvidable con nuestros arreglos personalizados
+                </p>
+                <div class="decorative-line mx-auto mt-6"></div>
+            </div>
+            
+            <!-- Services Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="scroll-reveal text-center p-8 bg-rose-50 rounded-3xl hover:bg-rose-100 transition group cursor-pointer">
+                    <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg group-hover:scale-110 transition">
+                        💕
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-gray-800 mb-3">Románticos</h3>
+                    <p class="text-gray-500 text-sm">Aniversarios, San Valentín, declaraciones de amor</p>
+                </div>
+                
+                <div class="scroll-reveal text-center p-8 bg-amber-50 rounded-3xl hover:bg-amber-100 transition group cursor-pointer" style="transition-delay: 0.1s;">
+                    <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg group-hover:scale-110 transition">
+                        🎂
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-gray-800 mb-3">Cumpleaños</h3>
+                    <p class="text-gray-500 text-sm">Celebra con flores el día especial de alguien</p>
+                </div>
+                
+                <div class="scroll-reveal text-center p-8 bg-purple-50 rounded-3xl hover:bg-purple-100 transition group cursor-pointer" style="transition-delay: 0.2s;">
+                    <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg group-hover:scale-110 transition">
+                        💐
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-gray-800 mb-3">Bodas</h3>
+                    <p class="text-gray-500 text-sm">Ramos de novia y decoración floral</p>
+                </div>
+                
+                <div class="scroll-reveal text-center p-8 bg-green-50 rounded-3xl hover:bg-green-100 transition group cursor-pointer" style="transition-delay: 0.3s;">
+                    <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg group-hover:scale-110 transition">
+                        🏠
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-gray-800 mb-3">Decoración</h3>
+                    <p class="text-gray-500 text-sm">Arreglos para espacios y eventos</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Order Section -->
+    <section class="py-24 gradient-sage text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="text-rose-200 font-medium tracking-widest uppercase text-sm">Fácil y Rápido</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">
+                    ¿Cómo Pedir?
+                </h2>
+                <p class="text-white/80 max-w-2xl mx-auto">
+                    Pedir tu ramo perfecto es muy sencillo, solo sigue estos pasos
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="scroll-reveal text-center">
+                    <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-3xl font-display font-bold mx-auto mb-6 border-2 border-white/30">
+                        1
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Elige tu Ramo</h3>
+                    <p class="text-white/70">Explora nuestro catálogo y encuentra el ramo perfecto para la ocasión</p>
+                </div>
+                
+                <div class="scroll-reveal text-center" style="transition-delay: 0.1s;">
+                    <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-3xl font-display font-bold mx-auto mb-6 border-2 border-white/30">
+                        2
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Escríbenos</h3>
+                    <p class="text-white/70">Envíanos un DM en Instagram o mensaje por WhatsApp con tu pedido</p>
+                </div>
+                
+                <div class="scroll-reveal text-center" style="transition-delay: 0.2s;">
+                    <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-3xl font-display font-bold mx-auto mb-6 border-2 border-white/30">
+                        3
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Recíbelo</h3>
+                    <p class="text-white/70">Coordinamos la entrega en La Habana. ¡Flores frescas a tu puerta!</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 scroll-reveal">
+                <a href="https://wa.me/5356856498?text=Hola%20%F0%9F%8C%B8%20Quiero%20hacer%20un%20pedido" target="_blank" class="inline-flex items-center gap-3 px-10 py-5 bg-white text-green-700 rounded-full font-semibold text-lg hover:bg-rose-100 transition shadow-xl">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Pedir por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 bg-rose-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="text-rose-400 font-medium tracking-widest uppercase text-sm">Testimonios</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-800 mt-4 mb-6">
+                    Clientes <span class="text-rose-400">Felices</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="scroll-reveal bg-white rounded-3xl p-8 shadow-lg">
+                    <div class="flex items-center gap-1 text-yellow-400 mb-4">★★★★★</div>
+                    <p class="text-gray-600 mb-6 italic">"El ramo que me llegó fue aún más hermoso que en las fotos. Mi esposa quedó encantada. ¡100% recomendados!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-rose-200 rounded-full flex items-center justify-center font-semibold text-rose-600">JM</div>
+                        <div>
+                            <p class="font-semibold text-gray-800">Jorge M.</p>
+                            <p class="text-sm text-gray-500">Vedado, La Habana</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="scroll-reveal bg-white rounded-3xl p-8 shadow-lg" style="transition-delay: 0.1s;">
+                    <div class="flex items-center gap-1 text-yellow-400 mb-4">★★★★★</div>
+                    <p class="text-gray-600 mb-6 italic">"Flores frescas, entrega puntual y un diseño precioso. Ya es mi floristería de confianza para cada ocasión especial."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-green-200 rounded-full flex items-center justify-center font-semibold text-green-600">MR</div>
+                        <div>
+                            <p class="font-semibold text-gray-800">María R.</p>
+                            <p class="text-sm text-gray-500">Playa, La Habana</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="scroll-reveal bg-white rounded-3xl p-8 shadow-lg" style="transition-delay: 0.2s;">
+                    <div class="flex items-center gap-1 text-yellow-400 mb-4">★★★★★</div>
+                    <p class="text-gray-600 mb-6 italic">"El ramo de mi boda fue un sueño hecho realidad. Captaron exactamente la esencia que buscaba. ¡Gracias Bloom Piper!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-200 rounded-full flex items-center justify-center font-semibold text-purple-600">LC</div>
+                        <div>
+                            <p class="font-semibold text-gray-800">Laura C.</p>
+                            <p class="text-sm text-gray-500">Centro Habana</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section id="contacto" class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="scroll-reveal text-center bg-gradient-to-br from-rose-100 to-pink-100 rounded-3xl p-12 md:p-16 relative overflow-hidden">
+                <!-- Decorative -->
+                <div class="absolute top-0 right-0 w-40 h-40 bg-rose-200 rounded-full blur-3xl opacity-50"></div>
+                <div class="absolute bottom-0 left-0 w-32 h-32 bg-pink-200 rounded-full blur-3xl opacity-50"></div>
+                
+                <div class="relative z-10">
+                    <span class="text-6xl mb-6 block">🌸</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                        ¿Lista para sorprender con flores?
+                    </h2>
+                    <p class="text-gray-600 mb-8 max-w-lg mx-auto">
+                        Escríbenos por WhatsApp o Instagram y cuéntanos qué tienes en mente. 
+                        Creamos el ramo perfecto para ti.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="https://wa.me/5356856498?text=Hola%20%F0%9F%8C%B8%20Me%20gustar%C3%ADa%20hacer%20un%20pedido" target="_blank" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-green-500 hover:bg-green-600 text-white rounded-full font-semibold transition shadow-lg">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                            </svg>
+                            WhatsApp
+                        </a>
+                        <a href="https://www.instagram.com/bloompipper" target="_blank" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 hover:opacity-90 text-white rounded-full font-semibold transition shadow-lg">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                            @bloompipper
+                        </a>
+                    </div>
+                    
+                    <p class="text-gray-500 text-sm mt-8">📍 La Habana, Cuba • Envíos en toda la ciudad</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-rose-400 to-pink-400 flex items-center justify-center">
+                            <span class="text-2xl">🌸</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-xl font-semibold">Bloom Piper</h3>
+                            <p class="text-sm text-gray-400">Floristería Boutique</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-sm">
+                        🌿 Minimalismo floral con esencia natural. Ramos únicos para cada ocasión especial en La Habana.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/bloompipper" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://wa.me/5356856498" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-green-500 transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold mb-6">Enlaces</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#inicio" class="hover:text-rose-400 transition">Inicio</a></li>
+                        <li><a href="#catalogo" class="hover:text-rose-400 transition">Catálogo</a></li>
+                        <li><a href="#servicios" class="hover:text-rose-400 transition">Servicios</a></li>
+                        <li><a href="#contacto" class="hover:text-rose-400 transition">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold mb-6">Contacto</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <span>📍</span> La Habana, Cuba
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span>📱</span> WhatsApp
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span>📸</span> @bloompipper
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2025 Bloom Piper. Todos los derechos reservados.</p>
+                <p class="mt-2">Hecho con 🌸 en La Habana</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5356856498?text=Hola%20%F0%9F%8C%B8%20Quiero%20hacer%20un%20pedido" target="_blank" class="whatsapp-float">
+        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <!-- JavaScript -->
+    <script>
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+        
+        // Close mobile menu when clicking links
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
